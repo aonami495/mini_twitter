@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_25_044445) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_27_075330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_25_044445) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "reply_to_id"
+    t.bigint "quote_id"
+    t.index ["quote_id"], name: "index_posts_on_quote_id"
+    t.index ["reply_to_id"], name: "index_posts_on_reply_to_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -59,5 +63,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_25_044445) do
   add_foreign_key "images", "posts"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "posts", "posts", column: "quote_id"
+  add_foreign_key "posts", "posts", column: "reply_to_id"
   add_foreign_key "posts", "users"
 end
