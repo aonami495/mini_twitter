@@ -1,0 +1,12 @@
+<h1>タイムライン</h1>
+<% @posts.each do |post| %>
+<div>
+    <p><%= post.user.name %></p>
+    <p><%= post.body %></p>
+    <p><%= post.created_at %></p>
+    <p><%= link_to "show", post %>
+</div>
+<% end %>
+<div>
+    <%= link_to "new",new_post_path %>
+</div>

@@ -1,0 +1,28 @@
+<div>
+    <p> <%= @post.user.name %></p>
+    <p> <%= @post.body %> </p>
+    <p> <%= @post.created_at %> </p>
+</div>
+
+<% if @post.user == current_user %>
+<%= link_to "投稿を削除する", @post, data:{ turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+<% end %>
+
+<div>
+
+    <h3>リプライ</h3>
+    <% if @post.replies.present? %>
+    <% @post.replies.each do |reply| %>
+    <div>
+        <p> <%= reply.user.name %> </p>
+        <p> <%= reply.body %> </p>
+    </div>
+    <% end %>
+    <% else %>
+    <p> 返信はありません </p>
+    <% end %>
+
+</div>
+<div>
+    <%= link_to "一覧に戻る", posts_path %>
+</div>
