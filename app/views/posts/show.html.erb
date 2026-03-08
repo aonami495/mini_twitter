@@ -2,11 +2,19 @@
     <p> <%= @post.user.name %></p>
     <p> <%= @post.body %> </p>
     <p> <%= @post.created_at %> </p>
+    <p><%= @post.likes.count %> </p>
 </div>
 
 <% if @post.user == current_user %>
 <%= link_to "投稿を削除する", @post, data:{ turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
 <% end %>
+
+<% if current_user.likes.exists?(post:@post) %>
+<%= button_to "いいね取り消し", post_like_path(@post), method: :delete %>
+<% else %>
+<%= button_to "いいね",post_like_path(@post), method: :post %>
+<% end %>
+
 
 <div>
 
