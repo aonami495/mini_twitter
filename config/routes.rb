@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+resources :users, only: [ :show ]
+
   resources :posts, only: [ :index, :new, :create, :show, :destroy ]
   devise_for :users
 
   resources :posts do
     resource :like, only: [ :create, :destroy ]
+  end
+
+  resources :user do
+    resource :follow, only: [ :create, :destroy ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

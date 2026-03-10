@@ -1,0 +1,21 @@
+<h1>
+    <%= @user.name %>
+</h1>
+<h2>フォロー数</h2>
+<%= @user.active_follows.count %>
+<h2>フォロワー数</h2>
+<%= @user.passive_follows.count %>
+
+<% if @user != current_user %>
+<% if current_user.following.include?(@user) %>
+<%= button_to "フォローを外す", user_follow_path(@user), method: :delete %>
+<% else %>
+<%= button_to "フォロー",user_follow_path(@user), method: :post %>
+<% end %>
+<% end %>
+
+<div>
+    <% @user.posts.each do |post|%>
+    <%=  post.body  %>
+    <% end %>
+</div>
