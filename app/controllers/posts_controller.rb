@@ -1,7 +1,10 @@
 class PostsController < ApplicationController
    before_action :authenticate_user!
   def index
-    @posts = Post.all.includes(:user, :images).order(created_at: :desc)
+    following_ids = current_user.following.ids
+    @posts = Post.where(user_id: [ *following_ids, current_user.id ])
+            .includes(:user, :images)
+            .order(created_at: :desc)
   end
 
   def new

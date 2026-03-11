@@ -3,6 +3,7 @@ class LikesController < ApplicationController
   before_action :set_post, only: [ :create, :destroy ]
 
   def create
+    @like = current_user.likes.build(post: @post)
     if @like.save
       redirect_to post_path(@post), notice: "いいねをしました"
     else
