@@ -1,24 +1,54 @@
-# README
+# mini_twitter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要　
 
-Things you may want to cover:
+Twitter風のSNSアプリケーションです。
+手軽に自身の考えを発信したい人向けのものです。
 
-* Ruby version
+## 機能一覧
 
-* System dependencies
+- ユーザー登録・ログイン
+- テキスト投稿
+- リプライ・引用投稿
+- いいね（いいね / いいね取り消し）
+- フォロー / フォロー解除
+- タイムライン（フォロー中のユーザーの投稿を表示）
 
-* Configuration
+## ER図
 
-* Database creation
+![ER図](docs/簡易版TwitterER図.drawio.png)
 
-* Database initialization
+## 技術スタック
 
-* How to run the test suite
+- Ruby on Rails 7.2.3
 
-* Services (job queues, cache servers, search engines, etc.)
+- PostgreSQL 16.11
 
-* Deployment instructions
+- devise 5.0.2
 
-* ...
+- RSpec　8.0.3
+
+## 技術選定理由
+
+### Ruby on Rails
+
+楽しさを重視したプログラミング言語Rubyを使ったアプリ開発をするため採用。
+RESTfulな設計思想により、SNSのようなWebアプリケーションを迅速に開発するのに適している。
+
+### PostgreSQL
+
+実務環境で多く使われているDBであるため
+
+### devise 5.0.2
+
+実務で最も採用率が高く、現場で求められる知識だから
+
+### RSpec　8.0.3
+
+Web系の現場で最も広く使われているため、実務を意識して選択
+
+## 開発中に意識したこと
+
+- 今書いているコードが全体のフローの中でどのような動きをするか意識していた
+- なるべくなぜこう動くのかを理解しながら進むようにしていた
+- フォロー機能では自己結合リレーションを用い、同じUsersテーブルへの2つの外部キーでフォロー/フォロワーの双方向の関係を実現した
