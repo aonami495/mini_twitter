@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
    before_action :authenticate_user!
-  def index
+  def index # 自身のポストとフォローしている人のポストを表示する
     following_ids = current_user.following.ids
     @posts = Post.where(user_id: [ *following_ids, current_user.id ])
             .includes(:user, :images)
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to @post, notice: "Post was successfully created."
+      redirect_to @post, notice: "投稿を作成しました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
   def destroy
     @post = current_user.posts.find(params[:id])
     @post.destroy
-    redirect_to posts_url, notice: "Post was successfully destroyed."
+    redirect_to posts_url, notice: "投稿を削除しました"
   end
 
   private
